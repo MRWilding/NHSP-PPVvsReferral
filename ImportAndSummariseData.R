@@ -2,7 +2,7 @@
 library(readr)
 library(dplyr)
 
-data <- read_csv("Data for PPV chart.csv", col_types = ("ccccccnnnnc")) %>% #read in the extracted data, assigning correct data types
+data <- read_csv(choose.files(), col_types = ("ccccccnnnnc")) %>% #read in the extracted data, assigning correct data types
   #convert the bilateral PCHI column to a numeric type
   mutate(`Bilateral PCHI Inc ANSD` = as.numeric(case_when( 
     `Bilateral PCHI Inc ANSD` == "Yes" ~ 1,
