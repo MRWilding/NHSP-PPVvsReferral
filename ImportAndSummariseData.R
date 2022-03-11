@@ -11,7 +11,7 @@ data <- read_csv(choose.files(), col_types = ("ccccccnnnnc")) %>% #read in the e
 
 data_manipulated <- data %>%
   filter(IsLatestSession == "Yes") %>% # restrict the data down to just the latest sessions (removes earlier audiology sessions)
-  filter(`Current Site Code` != "GOS") %>% # Remove Great Ormond Street data (small number children's hospital)
+  filter(!`Current Site Code` %in% c("GOS", "WLS")) %>% # Remove Great Ormond Street (small number children's hospital) and Wales data
   group_by(`Current Site`, `Current Site Code`, `Screening Year`, Protocol) %>% # group the data
   # Summarise the data to sums of each column by each group, ignoring NA values. Drops unused columns and grouping.
   summarise(`Screens Completed` = sum(`Screens Completed`, na.rm = T), 
